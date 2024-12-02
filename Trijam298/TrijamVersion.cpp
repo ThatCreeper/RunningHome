@@ -194,8 +194,8 @@ bool ProcessDoor() {
 	p.height = 7;
 	for (const auto &d : entities["Door"]) {
 		Rectangle D;
-		D.x = d["x"] + 3;
-		D.y = d["y"] + 3;
+		D.x = (int)d["x"] + 3;
+		D.y = (int)d["y"] + 3;
 		D.width = 2;
 		D.height = 5;
 		int t = d["customFields"]["id"];
@@ -267,8 +267,8 @@ void FanButton() {
 		if (triggeredButtons.contains(b["iid"]))
 			continue;
 		Rectangle D;
-		D.x = b["x"] + 5;
-		D.y = b["y"] + 2;
+		D.x = (int)b["x"] + 5;
+		D.y = (int)b["y"] + 2;
 		D.width = 4;
 		D.height = 2;
 		if (!CheckCollisionRecs(p, D))
@@ -280,7 +280,7 @@ void FanButton() {
 		for (const auto &f : entities["Fan"]) {
 			if (f["iid"] != fid)
 				continue;
-			AddParticles(f["x"] + 8, f["y"]);
+			AddParticles((int)f["x"] + 8, f["y"]);
 			break;
 		}
 	}
@@ -323,6 +323,7 @@ bool TrijamRunGame() {
 	lastParticles = {};
 	vy = 0;
 	vx = 0;
+	
 	UnloadFileText(fileText);
 	IncrementLevel();
 
