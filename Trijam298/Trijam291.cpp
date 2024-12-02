@@ -69,6 +69,7 @@ bool PickFlags() {
 }
 
 bool TrijamRunGame();
+void PreloadAssets();
 
 int main() {
 	/*{
@@ -81,6 +82,7 @@ int main() {
 	}*/
 
 	InitWindow(SCRWID, SCRHEI, "Trijam 298");
+	PreloadAssets();
 	InitAudioDevice();
 	LoadSounds();
 	SetExitKey(0);
