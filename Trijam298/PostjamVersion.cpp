@@ -163,7 +163,8 @@ static void TryMove(int dx, int dy) {
 			}
 			else if (!IsFullTile(GetTile(px), GetTile(py + 1)) && !IsFullTile(GetTile(px), GetTile(py + 1))) {
 				px--;
-			} else {
+			}
+			else {
 				if (vx > 0)
 					vx = 0;
 			}
@@ -301,7 +302,7 @@ static bool GameOver() {
 	return false;
 }
 
-void PreloadAssets() {
+void PostjamPreloadAssets() {
 	collisionI = LoadImage("ldtk/map/simplified/Level_0/Collision-int.png");
 	background = LoadTexture("ldtk/map/simplified/Level_0/_composite.png");
 	player = LoadTexture("player.png");
@@ -314,11 +315,11 @@ void PreloadAssets() {
 	UnloadFileText(fileText);
 }
 
-bool TrijamRunGame() {
+bool PostjamRunGame() {
 	int fadein = 0;
 	bool restart = false;
 
-	
+
 	level = -1;
 	lastTriggeredButtons = {};
 	triggeredFans = {};
@@ -328,7 +329,7 @@ bool TrijamRunGame() {
 	lastParticles = {};
 	vy = 0;
 	vx = 0;
-	
+
 	IncrementLevel();
 
 	PlaySound(SND_START);
@@ -420,9 +421,16 @@ bool TrijamRunGame() {
 		DrawTexture(player, px, py, WHITE);
 
 		EndMode2D();
-
-		DrawRectangle(0, SCRHEI - 32, SCRWID * stam / stammax, 32, Fade(WHITE, 0.5f));
-		DrawText(TextFormat("%.1f", stammax - stam), 0, SCRHEI - 32 - 20, 20, WHITE);
+		{
+			Color c = WHITE;
+			c.g *= stam / stammax;
+			c.b *= stam / stammax;
+			c.a = (int)(255 * (1.f - (stam / stammax)));
+			c.a /= 2;
+			c.a += 128;
+			DrawRectangle(0, SCRHEI - 32 + 6, SCRWID * stam / stammax, 32 - 6, c);
+		}
+		// DrawText(TextFormat("%.1f", stammax - stam), 0, SCRHEI - 32 - 20, 20, WHITE);
 
 		if (level == 0)
 			DrawKeybindBar("[Left] Left [Right] Right", "[Up] Jump", false);
