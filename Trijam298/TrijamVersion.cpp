@@ -305,15 +305,15 @@ bool TrijamRunGame() {
 	int fadein = 0;
 	bool restart = false;
 
-	collisionI = LoadImage("../ldtk/map/simplified/Level_0/Collision-int.png");
-	background = LoadTexture("../ldtk/map/simplified/Level_0/_composite.png");
+	collisionI = LoadImage("ldtk/map/simplified/Level_0/Collision-int.png");
+	background = LoadTexture("ldtk/map/simplified/Level_0/_composite.png");
 	player = LoadTexture("player.png");
 	door = LoadTexture("door.png");
 	fanb = LoadTexture("fanbutton.png");
 	fanbd = LoadTexture("fanbuttond.png");
 	fan = LoadTexture("fan.png");
 	level = -1;
-	char *fileText = LoadFileText("../ldtk/map/simplified/Level_0/data.json");
+	char *fileText = LoadFileText("ldtk/map/simplified/Level_0/data.json");
 	entities = json::parse(fileText)["entities"];
 	lastTriggeredButtons = {};
 	triggeredFans = {};
